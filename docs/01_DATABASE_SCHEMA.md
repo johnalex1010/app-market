@@ -282,6 +282,22 @@ on public.products(user_id, slug)
 where is_system = false;
 ```
 
+### Imagen del producto
+
+La imagen del catálogo se guarda en `public.products.image_url`.
+
+Ese es el campo que debes llenar para que el producto muestre imagen en el listado, el detalle y el formulario. Debe ser una URL `http` o `https`, por ejemplo una URL pública generada desde Supabase Storage.
+
+No confundir con `public.market_items.image_url`: ese campo queda reservado para una foto histórica de un item comprado dentro de un mercado específico, si más adelante se decide registrar evidencias por compra.
+
+Ejemplo para agregar imagen a un producto existente:
+
+```sql
+update public.products
+set image_url = 'https://tu-dominio-o-storage.com/products/arroz.webp'
+where slug = 'arroz';
+```
+
 ---
 
 # 5.5 markets

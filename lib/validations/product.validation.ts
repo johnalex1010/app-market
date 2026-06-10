@@ -13,7 +13,15 @@ export const productSchema = z.object({
     .trim()
     .max(500, 'La descripción no debe superar 500 caracteres.')
     .optional()
-    .nullable()
+    .nullable(),
+  image_url: z
+    .string()
+    .trim()
+    .url('Ingresa una URL de imagen válida.')
+    .refine((value) => ['http:', 'https:'].includes(new URL(value).protocol), 'La imagen debe usar una URL http o https.')
+    .optional()
+    .or(z.literal(''))
+    .transform((value) => value || null)
 });
 
 export type ProductFormValues = z.infer<typeof productSchema>;

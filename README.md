@@ -86,11 +86,11 @@ El acceso se filtra por usuario desde Server Actions/queries y debe estar respal
 El módulo de productos permite consultar productos del sistema y administrar productos propios.
 
 - `/products`: lista productos del sistema y productos creados por el usuario.
-- `/products/new`: crea un producto propio con nombre, categoría, unidad por defecto y descripción.
+- `/products/new`: crea un producto propio con nombre, categoría, unidad por defecto, descripción e imagen opcional.
 - `/products/[id]`: muestra detalle del producto e historial de precios registrado en mercados.
 - `/products/[id]/edit`: edita productos propios. Los productos del sistema son de solo lectura.
 
-Los productos propios se guardan con `is_system = false`, `user_id = auth.uid()` y `slug` generado desde el nombre. Las acciones de edición y eliminación filtran por `user_id` e `is_system = false` para evitar modificar catálogos globales.
+Los productos propios se guardan con `is_system = false`, `user_id = auth.uid()` y `slug` generado desde el nombre. La imagen opcional del producto se guarda en `products.image_url` como URL `http` o `https` y se muestra en listado, detalle y formulario. Las acciones de edición y eliminación filtran por `user_id` e `is_system = false` para evitar modificar catálogos globales.
 
 ## Flujo de categorías
 

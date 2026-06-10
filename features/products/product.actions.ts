@@ -23,7 +23,8 @@ function parseProductFormData(formData: FormData) {
     name: getStringField(formData, 'name'),
     category_id: getStringField(formData, 'category_id'),
     default_unit_id: getStringField(formData, 'default_unit_id'),
-    description: getStringField(formData, 'description') || null
+    description: getStringField(formData, 'description') || null,
+    image_url: getStringField(formData, 'image_url')
   });
 }
 
@@ -57,8 +58,7 @@ export async function createProductAction(_state: ProductFormState = DEFAULT_PRO
       ...parsed.data,
       slug,
       user_id: user.id,
-      is_system: false,
-      image_url: null
+      is_system: false
     })
     .select('id')
     .single();

@@ -1,9 +1,17 @@
 import Link from 'next/link';
 import { ProductList } from '@/components/products/product-list';
+import { ProductToolbar } from '@/components/products/product-toolbar';
 import { getProducts } from '@/services/products.service';
 
 export default async function ProductsPage() {
   const products = await getProducts();
+  const categories = products.reduce<{ id: string; name: string }[]>((accumulator, product) => {
+    if (!product.categories || accumulator.some((category) => category.id === product.categories?.id)) {
+      return accumulator;
+    }
+
+    return [...accumulator, product.categories];
+  }, []);
 
   return (
     <section className="space-y-6">
@@ -19,6 +27,7 @@ export default async function ProductsPage() {
           Nuevo producto
         </Link>
       </div>
+      <ProductToolbar categories={categories} />
       <ProductList products={products} />
     </section>
   );

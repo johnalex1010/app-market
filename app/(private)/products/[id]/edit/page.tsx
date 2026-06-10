@@ -15,7 +15,7 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
   }
 
   return (
-    <section className="mx-auto max-w-2xl space-y-6">
+    <section className="mx-auto max-w-5xl space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-slate-950">Editar producto</h1>
         <p className="mt-1 text-sm text-slate-600">Actualiza la información de tu producto propio.</p>
