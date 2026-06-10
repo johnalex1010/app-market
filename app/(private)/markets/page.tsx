@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import { Plus } from 'lucide-react';
 import { MarketList } from '@/components/markets/market-list';
+import { MarketStats } from '@/components/markets/market-stats';
 import { getMarketsByUser } from '@/services/markets.service';
 
 export default async function MarketsPage() {
@@ -13,12 +15,14 @@ export default async function MarketsPage() {
           <p className="mt-1 text-sm text-slate-600">Registra tus compras y construye histórico de precios.</p>
         </div>
         <Link
-          className="inline-flex items-center justify-center rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-700"
+          className="inline-flex items-center justify-center gap-2 rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-700"
           href="/markets/new"
         >
+          <Plus aria-hidden="true" className="h-4 w-4" />
           Nuevo mercado
         </Link>
       </div>
+      <MarketStats markets={markets} />
       <MarketList markets={markets} />
     </section>
   );

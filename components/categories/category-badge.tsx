@@ -1,3 +1,4 @@
+import { CategoryIcon } from '@/components/categories/category-icon';
 import { Badge } from '@/components/ui/badge';
 import type { Category } from '@/types/category.types';
 
@@ -7,8 +8,8 @@ type CategoryBadgeProps = {
 
 export function CategoryBadge({ category }: CategoryBadgeProps) {
   return (
-    <Badge className="gap-1" style={category.color ? { backgroundColor: `${category.color}18`, color: category.color } : undefined}>
-      {category.icon ? <span aria-hidden="true">{category.icon}</span> : null}
+    <Badge className="gap-1.5" style={category.color ? { backgroundColor: `${category.color}18`, color: category.color } : undefined}>
+      <CategoryIcon className="h-4 w-4 rounded-sm bg-transparent" color={category.color} icon={category.icon} />
       {category.name}
     </Badge>
   );

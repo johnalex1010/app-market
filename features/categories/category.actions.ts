@@ -1,6 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 import { buildCategorySlug } from '@/features/categories/category.helpers';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { categorySchema } from '@/lib/validations/category.validation';
@@ -113,11 +114,7 @@ export async function updateCategoryAction(categoryId: string, _state: CategoryF
 
   revalidatePath('/categories');
   revalidatePath('/products');
-
-  return {
-    success: true,
-    message: 'Categoría actualizada.'
-  };
+  redirect('/categories');
 }
 
 export async function deleteCategoryAction(categoryId: string) {

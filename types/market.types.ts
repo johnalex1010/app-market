@@ -6,6 +6,7 @@ export type Market = {
   name: string;
   market_date: string;
   total_amount: number;
+  item_count?: number;
   notes: string | null;
   created_at: string;
   updated_at: string;

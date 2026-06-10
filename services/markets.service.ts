@@ -8,10 +8,24 @@ function toMarket(row: Record<string, unknown>): Market {
     name: String(row.name),
     market_date: String(row.market_date),
     total_amount: Number(row.total_amount ?? 0),
+    item_count: typeof row.item_count === 'number' ? row.item_count : 0,
     notes: row.notes ? String(row.notes) : null,
     created_at: String(row.created_at),
     updated_at: String(row.updated_at)
   };
+}
+
+function countItemsByMarket(items: { market_id: string | null }[] | null) {
+  return (items ?? []).reduce<Record<string, number>>((accumulator, item) => {
+    if (!item.market_id) {
+      return accumulator;
+    }
+
+    return {
+      ...accumulator,
+      [item.market_id]: (accumulator[item.market_id] ?? 0) + 1
+    };
+  }, {});
 }
 
 export async function getCurrentUserId() {
@@ -31,18 +45,27 @@ export async function getMarketsByUser() {
     return [];
   }
 
-  const { data, error } = await supabase
-    .from('markets')
-    .select('*')
-    .eq('user_id', userId)
-    .order('market_date', { ascending: false })
-    .order('created_at', { ascending: false });
+  const [{ data, error }, itemsResult] = await Promise.all([
+    supabase
+      .from('markets')
+      .select('*')
+      .eq('user_id', userId)
+      .order('market_date', { ascending: false })
+      .order('created_at', { ascending: false }),
+    supabase.from('market_items').select('market_id').eq('user_id', userId)
+  ]);
 
   if (error) {
     throw error;
   }
 
-  return (data ?? []).map((market) => toMarket(market));
+  if (itemsResult.error) {
+    throw itemsResult.error;
+  }
+
+  const itemCounts = countItemsByMarket(itemsResult.data);
+
+  return (data ?? []).map((market) => toMarket({ ...market, item_count: itemCounts[String(market.id)] ?? 0 }));
 }
 
 export async function getMarketById(marketId: string) {
