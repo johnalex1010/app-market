@@ -19,7 +19,7 @@ Aplicación web responsive tipo PWA para registrar mercados, productos y variaci
 
 - Node.js compatible con Next.js 15.
 - npm como gestor de paquetes inicial.
-- Proyecto Supabase pendiente de configurar.
+- Proyecto Supabase creado y credenciales configuradas para completar el setup remoto.
 
 ## Instalación
 
@@ -105,18 +105,19 @@ Deploy sugerido: Vercel. La configuración concreta queda pendiente hasta defini
 - Si faltan variables de entorno, revisar `.env.local`.
 - Si Supabase falla, validar URL, anon key y configuración RLS.
 - Si Tailwind no aplica estilos, revisar `tailwind.config.ts` y `app/globals.css`.
-- Si una ruta privada no protege sesión, completar `middleware.ts` con el flujo de Supabase definido en `docs/03_SUPABASE_SETUP.md`.
+- Si una ruta privada redirige siempre a login, validar que `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` existan y que haya sesión activa.
 
 ## Riesgos conocidos
 
-- La autenticación real aún no está implementada.
+- Los formularios de autenticación aún no están conectados a Supabase Auth.
+- El proyecto Supabase remoto, el SQL del schema, los seeds y las policies RLS deben ejecutarse fuera del repositorio siguiendo `docs/03_SUPABASE_SETUP.md`.
 - Los servicios lanzan error explícito hasta tener SPEC funcional por dominio.
 - El soporte offline está preparado a nivel estructural, pero no implementado.
 
 ## Documentación técnica
 
-- [docs/01_DATABASE_SCHEMA.md](01_DATABASE_SCHEMA.md): esquema inicial de base de datos.
-- [docs/02_PROJECT_STRUCTURE.md](02_PROJECT_STRUCTURE.md): estructura base del proyecto.
-- [docs/03_SUPABASE_SETUP.md](docs/03_SUPABASE_SETUP.md): configuración Supabase pendiente.
+- [docs/01_DATABASE_SCHEMA.md](docs/01_DATABASE_SCHEMA.md): esquema inicial de base de datos.
+- [docs/02_PROJECT_STRUCTURE.md](docs/02_PROJECT_STRUCTURE.md): estructura base del proyecto.
+- [docs/03_SUPABASE_SETUP.md](docs/03_SUPABASE_SETUP.md): configuración Supabase, middleware de sesión y validación remota pendiente.
 - [docs/04_AUTH_FLOW.md](docs/04_AUTH_FLOW.md): flujo de autenticación pendiente.
 - [docs/05_MARKET_CRUD.md](docs/05_MARKET_CRUD.md): CRUD de mercados pendiente.
