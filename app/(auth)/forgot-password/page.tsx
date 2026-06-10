@@ -1,8 +1,10 @@
+import { AuthCard } from '@/components/auth/auth-card';
+import { ForgotPasswordForm } from '@/components/auth/forgot-password-form';
+
 export default function ForgotPasswordPage() {
   return (
-    <section className="w-full max-w-md rounded-lg bg-white p-6 shadow-sm">
-      <h1 className="text-2xl font-bold">Recuperar contraseña</h1>
-      <p className="mt-2 text-slate-600">Flujo pendiente de conectar con Supabase Auth.</p>
-    </section>
+    <AuthCard description="Te enviaremos un enlace seguro para actualizar tu contraseña." title="Recuperar contraseña">
+      <ForgotPasswordForm />
+    </AuthCard>
   );
 }

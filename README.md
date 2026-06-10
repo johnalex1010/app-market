@@ -57,6 +57,17 @@ npm run typecheck
 3. Mantener UI separada de servicios, queries y mutations.
 4. Validar TypeScript, lint y build antes de cerrar cambios funcionales.
 
+## Flujo de autenticación
+
+El módulo Auth usa Supabase Auth con cookies SSR y Server Actions.
+
+- Rutas públicas: `/login`, `/register`, `/forgot-password`, `/reset-password`.
+- Callback técnico de Supabase: `/auth/callback`.
+- Rutas privadas protegidas: `/dashboard`, `/markets`, `/products`, `/categories`, `/statistics`, `/settings`, `/offline`.
+- El registro envía `full_name` como metadata para que el trigger remoto cree el perfil en `profiles`.
+- La recuperación de contraseña usa `NEXT_PUBLIC_APP_URL` para construir el enlace de retorno.
+- `SUPABASE_SERVICE_ROLE_KEY` no se usa en componentes cliente ni en el flujo Auth del MVP.
+
 ## Flujo de build
 
 ```bash
@@ -109,8 +120,8 @@ Deploy sugerido: Vercel. La configuración concreta queda pendiente hasta defini
 
 ## Riesgos conocidos
 
-- Los formularios de autenticación aún no están conectados a Supabase Auth.
 - El proyecto Supabase remoto, el SQL del schema, los seeds y las policies RLS deben ejecutarse fuera del repositorio siguiendo `docs/03_SUPABASE_SETUP.md`.
+- La creación automática de perfiles depende del trigger `handle_new_user` aplicado en Supabase.
 - Los servicios lanzan error explícito hasta tener SPEC funcional por dominio.
 - El soporte offline está preparado a nivel estructural, pero no implementado.
 

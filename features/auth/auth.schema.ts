@@ -1,1 +1,1 @@
-export { authEmailSchema } from '@/lib/validations/auth.validation';
+export { authEmailSchema, forgotPasswordSchema, loginSchema, registerSchema, resetPasswordSchema } from '@/lib/validations/auth.validation';
