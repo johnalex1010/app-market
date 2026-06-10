@@ -103,6 +103,25 @@ El módulo de categorías permite consultar categorías del sistema y administra
 
 Las categorías propias se guardan con `is_system = false`, `user_id = auth.uid()` y `slug` generado desde el nombre. Las acciones de edición y eliminación filtran por `user_id` e `is_system = false`.
 
+## Flujo de estadísticas
+
+El módulo de estadísticas calcula métricas desde `markets` y `market_items` del usuario autenticado.
+
+- `/statistics`: muestra gasto total, mercados registrados, promedio por mercado y productos registrados.
+- Incluye gasto por mercados recientes.
+- Incluye distribución de gasto por categoría.
+- Incluye variación de productos con al menos dos registros históricos.
+
+La vista es server-rendered y depende de RLS más filtros por `user_id`. No usa datos mock.
+
+## Flujo de dashboard
+
+El dashboard usa las mismas métricas server-rendered de estadísticas para mostrar un resumen inicial.
+
+- `/dashboard`: muestra KPIs principales, último mercado, resumen de mercados recientes, accesos rápidos, gasto por categoría y variaciones recientes.
+- No usa datos mock.
+- Los enlaces llevan a mercados, productos y estadísticas completas.
+
 ## Flujo de build
 
 ```bash
