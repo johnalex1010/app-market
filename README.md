@@ -92,6 +92,17 @@ El módulo de productos permite consultar productos del sistema y administrar pr
 
 Los productos propios se guardan con `is_system = false`, `user_id = auth.uid()` y `slug` generado desde el nombre. Las acciones de edición y eliminación filtran por `user_id` e `is_system = false` para evitar modificar catálogos globales.
 
+## Flujo de categorías
+
+El módulo de categorías permite consultar categorías del sistema y administrar categorías propias.
+
+- `/categories`: lista categorías del sistema y categorías creadas por el usuario.
+- La misma pantalla permite crear categorías propias con nombre, ícono opcional y color.
+- Las categorías propias pueden editarse o eliminarse desde el listado.
+- Las categorías del sistema son de solo lectura.
+
+Las categorías propias se guardan con `is_system = false`, `user_id = auth.uid()` y `slug` generado desde el nombre. Las acciones de edición y eliminación filtran por `user_id` e `is_system = false`.
+
 ## Flujo de build
 
 ```bash

@@ -11,3 +11,9 @@ export type Category = {
   created_at: string;
   updated_at: string;
 };
+
+export type CategoryFormState = {
+  success: boolean;
+  message: string;
+  errors?: Record<string, string[] | undefined>;
+};
