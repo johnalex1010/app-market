@@ -68,6 +68,19 @@ El módulo Auth usa Supabase Auth con cookies SSR y Server Actions.
 - La recuperación de contraseña usa `NEXT_PUBLIC_APP_URL` para construir el enlace de retorno.
 - `SUPABASE_SERVICE_ROLE_KEY` no se usa en componentes cliente ni en el flujo Auth del MVP.
 
+## Flujo de mercados
+
+El módulo de mercados usa rutas privadas de App Router y Server Actions contra Supabase.
+
+- `/markets`: lista los mercados del usuario autenticado.
+- `/markets/new`: crea un mercado con nombre, fecha y notas.
+- `/markets/[id]`: muestra detalle, total acumulado, formulario de productos e items registrados.
+- `/markets/[id]/edit`: edita la información general del mercado.
+
+Cada item guarda producto, categoría, cantidad, unidad, precio pagado, `product_name_snapshot`, `purchase_date`, `sync_status = synced`, cantidad normalizada y precio unitario normalizado. Al crear, editar o eliminar items, la app recalcula `markets.total_amount`.
+
+El acceso se filtra por usuario desde Server Actions/queries y debe estar respaldado por las policies RLS descritas en `docs/01_DATABASE_SCHEMA.md`.
+
 ## Flujo de build
 
 ```bash
@@ -122,7 +135,7 @@ Deploy sugerido: Vercel. La configuración concreta queda pendiente hasta defini
 
 - El proyecto Supabase remoto, el SQL del schema, los seeds y las policies RLS deben ejecutarse fuera del repositorio siguiendo `docs/03_SUPABASE_SETUP.md`.
 - La creación automática de perfiles depende del trigger `handle_new_user` aplicado en Supabase.
-- Los servicios lanzan error explícito hasta tener SPEC funcional por dominio.
+- Los catálogos de productos, categorías y unidades deben estar sembrados en Supabase para agregar items a un mercado.
 - El soporte offline está preparado a nivel estructural, pero no implementado.
 
 ## Documentación técnica
@@ -131,4 +144,4 @@ Deploy sugerido: Vercel. La configuración concreta queda pendiente hasta defini
 - [docs/02_PROJECT_STRUCTURE.md](docs/02_PROJECT_STRUCTURE.md): estructura base del proyecto.
 - [docs/03_SUPABASE_SETUP.md](docs/03_SUPABASE_SETUP.md): configuración Supabase, middleware de sesión y validación remota pendiente.
 - [docs/04_AUTH_FLOW.md](docs/04_AUTH_FLOW.md): flujo de autenticación pendiente.
-- [docs/05_MARKET_CRUD.md](docs/05_MARKET_CRUD.md): CRUD de mercados pendiente.
+- [docs/05_MARKET_CRUD.md](docs/05_MARKET_CRUD.md): CRUD de mercados e items implementado.

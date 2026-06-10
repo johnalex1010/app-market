@@ -1,5 +1,3 @@
 export function formatPercentage(value: number) {
-  return new Intl.NumberFormat('es-CO', {
-    maximumFractionDigits: 1
-  }).format(value).concat('%');
+  return `${value > 0 ? '+' : ''}${value.toFixed(2)}%`;
 }
