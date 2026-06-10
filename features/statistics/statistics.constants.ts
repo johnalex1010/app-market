@@ -1,0 +1,1 @@
+export const STATISTICS_MIN_SAMPLE_SIZE = 2;

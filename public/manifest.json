@@ -1,0 +1,11 @@
+{
+  "name": "App Mercado",
+  "short_name": "Mercado",
+  "description": "Aplicación para registrar mercados y comparar precios.",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#059669",
+  "lang": "es-CO",
+  "icons": []
+}

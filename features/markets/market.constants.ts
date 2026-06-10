@@ -1,0 +1,1 @@
+export const MARKET_NAME_MAX_LENGTH = 120;
