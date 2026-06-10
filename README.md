@@ -81,6 +81,17 @@ Cada item guarda producto, categoría, cantidad, unidad, precio pagado, `product
 
 El acceso se filtra por usuario desde Server Actions/queries y debe estar respaldado por las policies RLS descritas en `docs/01_DATABASE_SCHEMA.md`.
 
+## Flujo de productos
+
+El módulo de productos permite consultar productos del sistema y administrar productos propios.
+
+- `/products`: lista productos del sistema y productos creados por el usuario.
+- `/products/new`: crea un producto propio con nombre, categoría, unidad por defecto y descripción.
+- `/products/[id]`: muestra detalle del producto e historial de precios registrado en mercados.
+- `/products/[id]/edit`: edita productos propios. Los productos del sistema son de solo lectura.
+
+Los productos propios se guardan con `is_system = false`, `user_id = auth.uid()` y `slug` generado desde el nombre. Las acciones de edición y eliminación filtran por `user_id` e `is_system = false` para evitar modificar catálogos globales.
+
 ## Flujo de build
 
 ```bash
@@ -135,7 +146,7 @@ Deploy sugerido: Vercel. La configuración concreta queda pendiente hasta defini
 
 - El proyecto Supabase remoto, el SQL del schema, los seeds y las policies RLS deben ejecutarse fuera del repositorio siguiendo `docs/03_SUPABASE_SETUP.md`.
 - La creación automática de perfiles depende del trigger `handle_new_user` aplicado en Supabase.
-- Los catálogos de productos, categorías y unidades deben estar sembrados en Supabase para agregar items a un mercado.
+- Las categorías y unidades deben estar sembradas en Supabase para crear productos propios y agregar items a un mercado.
 - El soporte offline está preparado a nivel estructural, pero no implementado.
 
 ## Documentación técnica
