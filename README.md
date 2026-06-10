@@ -115,8 +115,8 @@ Deploy sugerido: Vercel. La configuración concreta queda pendiente hasta defini
 
 ## Documentación técnica
 
-- [01_DATABASE_SCHEMA.md](01_DATABASE_SCHEMA.md): esquema inicial de base de datos.
-- [02_PROJECT_STRUCTURE.md](02_PROJECT_STRUCTURE.md): estructura base del proyecto.
+- [docs/01_DATABASE_SCHEMA.md](01_DATABASE_SCHEMA.md): esquema inicial de base de datos.
+- [docs/02_PROJECT_STRUCTURE.md](02_PROJECT_STRUCTURE.md): estructura base del proyecto.
 - [docs/03_SUPABASE_SETUP.md](docs/03_SUPABASE_SETUP.md): configuración Supabase pendiente.
 - [docs/04_AUTH_FLOW.md](docs/04_AUTH_FLOW.md): flujo de autenticación pendiente.
 - [docs/05_MARKET_CRUD.md](docs/05_MARKET_CRUD.md): CRUD de mercados pendiente.
